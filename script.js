@@ -23,6 +23,13 @@ function handleDataPlanet(url){
   fetch(url)
     .then(res => res.json())
     .then(data => {
+
+      if(data.results && data.results.length > 0) {
+        data = data.results[0]
+      } else if (data.results && data.results.length === 0) {
+        alert('Planeta não encontrado')
+        return
+      }
             
       const planetData = document.getElementById('planet-content')
 
@@ -35,4 +42,18 @@ function handleDataPlanet(url){
         </div>
       `
     })
+}
+
+function searchPlanet() {
+  const input = document.getElementById('search-planet')
+  const inputValue = input.value.toLowerCase()
+
+  if(inputValue === '') {
+    alert('Digite o nome do planeta')
+    return
+  }
+  
+  handleDataPlanet(`https://swapi.dev/api/planets/?search=${inputValue}`)
+
+  input.value = ''
 }
