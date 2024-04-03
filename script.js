@@ -41,6 +41,51 @@ function handleDataPlanet(url){
           <span><strong>Terreno: </strong>${data.terrain}</span>
         </div>
       `
+      const famousResidents = document.querySelector('.planet-famous')
+      famousResidents.innerHTML = ''
+
+      if (data.residents.length > 0) {
+        const residents = data.residents
+
+        const h3 = document.createElement('h3')
+        const table = document.createElement('table')
+        const thead = document.createElement('tr')
+        const nameTh = document.createElement('th')
+        const birthTh = document.createElement('th')
+        const tbody = document.createElement('tbody')
+        
+
+        famousResidents.appendChild(h3).textContent = 'Residentes Famosos'
+        
+        famousResidents.appendChild(table)
+
+        table.appendChild(thead)
+        thead.appendChild(nameTh).textContent = 'Nome'
+        thead.appendChild(birthTh).textContent = 'Data de Nascimento'
+
+        table.appendChild(tbody)
+
+        residents.forEach(resident => {
+          fetch(resident)
+            .then(res => res.json())
+            .then(data => {
+              
+              const tr = document.createElement('tr')
+              const nameTd = document.createElement('td') 
+              const birthTd = document.createElement('td') 
+
+
+              tr.appendChild(nameTd).textContent = data.name
+              tr.appendChild(birthTd).textContent = data.birth_year 
+
+              tbody.appendChild(tr)
+            })
+        }) 
+      } else {
+          famousResidents.innerHTML = `
+            <h3>Não há residentes famosos nesse planeta</h3>
+          `
+      } 
     })
 }
 
@@ -52,7 +97,7 @@ function searchPlanet() {
     alert('Digite o nome do planeta')
     return
   }
-  
+
   handleDataPlanet(`https://swapi.dev/api/planets/?search=${inputValue}`)
 
   input.value = ''
