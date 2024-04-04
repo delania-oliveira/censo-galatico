@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Philosopher:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
   <title>Censo Galático</title>
 </head>
 <body>
@@ -11,27 +15,24 @@
       <h1>Censo Galático</h1>
       <div class="input-search">
         <input id="search-planet" type="text" placeholder="Nome do planeta">
-        <button onclick="searchPlanet()">Buscar</button>
+        <img src="./assets/search.svg" alt="Buscar" onclick="searchPlanet()">
       </div>
     </div>
-    <nav class="menu-container">
-    </nav>
+    <span class="line"></span>
+    <nav class="menu-container"></nav>
   </header>
-
   <main>
     <div id="card">
       <div class="planet-container">
-        
         <div id="planet-content">
         </div>
-        
-        <div class="planet-famous">
-        </div>
-      
       </div>
     </div>
   </main>
-
+  <footer>
+    <span class="line"></span>
+    <span class="footer-content">Proposto por <a href="https://treinadev.com.br/">TreinaDev</a> & Desenvolvido por <a href="https://github.com/delania-oliveira/">Delania Oliveira</a></span> 
+  </footer>
   <script src="script.js"></script>
 </body>
 </html>

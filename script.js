@@ -3,7 +3,6 @@ function getPlanets() {
     .then(res => res.json())
     .then(data => {
       const planets = data.results
-      
       const navBar = document.querySelector('.menu-container')
 
       planets.forEach(planet => {
@@ -32,6 +31,7 @@ function handleDataPlanet(url){
       }
             
       const planetData = document.getElementById('planet-content')
+      const imgPlanet = data.name.toLowerCase().replace(' ', '')  
 
       planetData.innerHTML = `
         <div class="planet-info">
@@ -40,8 +40,11 @@ function handleDataPlanet(url){
           <span><strong>Clima: </strong>${data.climate}</span>
           <span><strong>Terreno: </strong>${data.terrain}</span>
         </div>
+        <img src="./assets/${imgPlanet}.png" alt="${data.name}">
       `
-      const famousResidents = document.querySelector('.planet-famous')
+      const planetInfo = document.querySelector('.planet-info')
+      const famousResidents = document.createElement('div')
+      famousResidents.classList.add('planet-famous')
       famousResidents.innerHTML = ''
 
       if (data.residents.length > 0) {
@@ -54,9 +57,7 @@ function handleDataPlanet(url){
         const birthTh = document.createElement('th')
         const tbody = document.createElement('tbody')
         
-
         famousResidents.appendChild(h3).textContent = 'Residentes Famosos'
-        
         famousResidents.appendChild(table)
 
         table.appendChild(thead)
@@ -69,11 +70,9 @@ function handleDataPlanet(url){
           fetch(resident)
             .then(res => res.json())
             .then(data => {
-              
               const tr = document.createElement('tr')
               const nameTd = document.createElement('td') 
               const birthTd = document.createElement('td') 
-
 
               tr.appendChild(nameTd).textContent = data.name
               tr.appendChild(birthTd).textContent = data.birth_year 
@@ -85,7 +84,8 @@ function handleDataPlanet(url){
           famousResidents.innerHTML = `
             <h3>Não há residentes famosos nesse planeta</h3>
           `
-      } 
+      }
+      planetInfo.appendChild(famousResidents)
     })
 }
 
